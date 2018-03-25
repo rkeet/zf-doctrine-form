@@ -1,7 +1,7 @@
 {
     "name": "rkeet/zf-doctrine-form",
     "description": "Zend Framework with Doctrine Form (Fieldset & InputFilter) usage focusing on re-usable components",
-    "keywords": ["framework", "mvc", "zf", "zf3", "form", "components", "fieldset", "input filter", "validator", "doctrine"],
+    "keywords": ["zend", "framework", "zend framework", "mvc", "zf", "zf3", "form", "components", "fieldset", "input filter", "validator", "doctrine"],
     "homepage": "http://keet.me/",
     "require": {
         "php": "^7.2",
