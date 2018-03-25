@@ -11,7 +11,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  * Class AbstractFieldsetInputFilterFactory
  * @package Keet\Form\Factory
  *
- * Creating FieldsetInputFilter classes is, alas, pretty much a custom job each and every time. However,
+ * Creating FieldsetInputFilterFactory classes is, alas, pretty much a custom job each and every time. However,
  * pretty much all of them have the same requirements when it comes to what they use. As such, we can provide
  * a class (this one) with some properties, getters/setters and a basic "apply the setters" function.
  */
