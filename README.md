@@ -2,7 +2,7 @@
 
 Zend Framework with Doctrine Form Module (Fieldset &amp; InputFilter) usage focusing on re-usable components
 
-###What's this module for?
+### What's this module for?
 
 Every web applications uses a lot of forms. Whether it be for a simple newsletter sign-up, or for more serious matters, such as a registration page or filling out taxes.
 
@@ -10,11 +10,11 @@ For pretty much every project we, the developers, have got to make sure these fo
 
 This module aims to help developers with the pains of setting up forms by providing the logic for the creation of the forms with the usage of Fieldset and InputFilter classes.
 
-###But... why?
+### But... why?
 
 Because creating forms is boring work, so we'd like to do as little of it as possible. 
 
-##Sign me up! What do I need?
+## Sign me up! What do I need?
 
 Your project must include at least the following requirements:
 
@@ -22,7 +22,7 @@ Your project must include at least the following requirements:
 * Zend Framework 3
 * Doctrine ORM Module
 
-##What does the module provide?
+## What does the module provide?
 
 This module gives you abstract classes for:
 
@@ -39,7 +39,7 @@ The above listed class types are available for 2 for the 2 supported hydration m
 * Zend Framework Reflection hydrator
 * Doctrine ORM Module DoctrineObject hydrator 
 
-##How to use this module?
+## How to use this module?
 
 Below are 3 examples of implementations provided to get you up and running as soon as possible. 
 
@@ -66,6 +66,6 @@ How to use the Collection methodology of the OneToMany relation in Forms also ap
 
 TODO - fill in the docs below
 
-###Basic form
-###Form using a Fieldset
-###Form using a Collection of Fieldsets
+### Basic form
+### Form using a Fieldset
+### Form using a Collection of Fieldsets
