@@ -13,7 +13,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
     /**
      * @var ObjectManager
      */
-    protected $entityManager;
+    protected $objectManager;
 
     /**
      * @param ContainerInterface $container
@@ -25,7 +25,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setEntityManager($container->get(EntityManager::class));
+        $this->setObjectManager($container->get(EntityManager::class));
         $this->setTranslator($container->get('translator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
@@ -35,7 +35,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
 
         /** @var AbstractDoctrineForm $form */
         $form = new $form($this->name, $this->options);
-        $form->setObjectManager($this->getEntityManager());
+        $form->setObjectManager($this->getObjectManager());
         $form->setTranslator($this->getTranslator());
         $form->setInputFilter($inputFilter);
 
@@ -62,18 +62,18 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
     /**
      * @return ObjectManager
      */
-    public function getEntityManager(): ObjectManager
+    public function getObjectManager(): ObjectManager
     {
-        return $this->entityManager;
+        return $this->objectManager;
     }
 
     /**
-     * @param ObjectManager $entityManager
+     * @param ObjectManager $objectManager
      * @return AbstractDoctrineFormFactory
      */
-    public function setEntityManager(ObjectManager $entityManager): AbstractDoctrineFormFactory
+    public function setObjectManager(ObjectManager $objectManager): AbstractDoctrineFormFactory
     {
-        $this->entityManager = $entityManager;
+        $this->objectManager = $objectManager;
         return $this;
     }
 
