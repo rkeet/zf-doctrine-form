@@ -20,9 +20,6 @@ abstract class AbstractFieldset extends Fieldset
         $this->add([
             'name' => 'id',
             'type' => Hidden::class,
-            'attributes' => [
-                'id' => '',
-            ],
         ]);
     }
 }
