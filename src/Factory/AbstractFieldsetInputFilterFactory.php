@@ -18,14 +18,14 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
 {
     /**
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * @var InputFilterPluginManager
      */
     protected $inputFilterManager;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
 
     /**
      * Use this function to setup the basic requirements commonly reused.
@@ -38,24 +38,6 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
     {
         $this->setTranslator($container->get('translator'));
         $this->setInputFilterManager($container->get(InputFilterPluginManager::class));
-    }
-
-    /**
-     * @return Translator
-     */
-    public function getTranslator(): Translator
-    {
-        return $this->translator;
-    }
-
-    /**
-     * @param Translator $translator
-     * @return AbstractFieldsetInputFilterFactory
-     */
-    public function setTranslator(Translator $translator): AbstractFieldsetInputFilterFactory
-    {
-        $this->translator = $translator;
-        return $this;
     }
 
     /**
@@ -73,6 +55,24 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
     public function setInputFilterManager(InputFilterPluginManager $inputFilterManager): AbstractFieldsetInputFilterFactory
     {
         $this->inputFilterManager = $inputFilterManager;
+        return $this;
+    }
+
+    /**
+     * @return Translator
+     */
+    public function getTranslator(): Translator
+    {
+        return $this->translator;
+    }
+
+    /**
+     * @param Translator $translator
+     * @return AbstractFieldsetInputFilterFactory
+     */
+    public function setTranslator(Translator $translator): AbstractFieldsetInputFilterFactory
+    {
+        $this->translator = $translator;
         return $this;
     }
 
