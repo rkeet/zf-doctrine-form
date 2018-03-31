@@ -3,7 +3,6 @@
 namespace Keet\Form\Factory;
 
 use Interop\Container\ContainerInterface;
-use Keet\Form\Form\GenericDeleteForm;
 use Zend\Hydrator\Reflection;
 
 class GenericDeleteFormFactory extends AbstractFormFactory

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Interop\Container\ContainerInterface;
 use Keet\Form\Form\GenericDoctrineDeleteForm;
+use Keet\Form\InputFilter\GenericDoctrineDeleteFieldsetInputFilter;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
 class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
@@ -26,9 +27,13 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        if (!$this->entityName) {
+        if (!$options['entity_name']) {
 
-            throw new ServiceNotCreatedException('Entity name (entityName (FQCN)) required for GenericDeleteFormFactory not set.');
+            throw new ServiceNotCreatedException('Option "entity_name" (FQCN) required for ' . __CLASS__ . '; not set.');
+        }
+        if (!$options['unique_property']) {
+
+            throw new ServiceNotCreatedException('Option "unique_property" required for ' . __CLASS__ . '; not set.');
         }
 
         $this->setObjectManager($container->get(EntityManager::class));
@@ -36,11 +41,11 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
         /** @var EntityRepository $entityRepository */
-        $entityRepository = $this->getObjectManager()->getRepository($this->entityName);
+        $entityRepository = $this->getObjectManager()->getRepository($options['entity_name']);
 
         $form = new GenericDoctrineDeleteForm($this->name, $this->options);
         $form->setHydrator(new DoctrineObject($this->objectManager));
-        $form->setObject(new $this->entityName());
+        $form->setObject(new $options['entity_name']());
         $form->setInputFilter(
             $this->getInputFilterPluginManager()->get(
                 GenericDoctrineDeleteFieldsetInputFilter::class,
@@ -53,7 +58,7 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
         );
         $form->setObjectManager($this->getObjectManager());
         $form->setTranslator($this->getTranslator());
-        $form->setOption('name_getter', $this->entityNameGetter);
+        $form->setOption('unique_property', $options['unique_property']);
 
         return $form;
     }
