@@ -2,7 +2,6 @@
 
 namespace Keet\Form\InputFilter;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Zend\Di\Exception\InvalidArgumentException;
 use Zend\Filter\ToInt;
@@ -21,18 +20,6 @@ abstract class AbstractDoctrineFieldsetInputFilter extends AbstractDoctrineInput
      */
     public function __construct(array $options)
     {
-        // Check if ObjectManager|EntityManager for InputFilter is set
-        if (!isset($options['object_manager'])) {
-
-            throw new InvalidArgumentException('Required parameter "object_manager" not found. InputFilters require the Doctrine ObjectManager|EntityManager.');
-        }
-
-        if (!$options['object_manager'] instanceof ObjectManager) {
-
-            throw new InvalidArgumentException('Given ObjectManager not an instance of Doctrines\' ObjectManager|EntityManager.');
-        }
-        $this->setObjectManager($options['object_manager']);
-
         // Check if ObjectRepository instance for InputFilter is set
         if (!isset($options['object_repository'])) {
 
