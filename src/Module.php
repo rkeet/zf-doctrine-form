@@ -14,7 +14,7 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface
     {
         $config = [];
 
-        foreach (glob(dirname(__DIR__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . '*.php') as $filename) {
+        foreach (glob(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . '*.php') as $filename) {
             $config = array_merge_recursive($config, include $filename);
         }
 
