@@ -33,7 +33,7 @@ abstract class AbstractDoctrineFieldsetFactory extends AbstractFieldsetFactory
         /** @var AbstractDoctrineFieldset $fieldset */
         $fieldset = new $fieldset($this->getEntityManager(), $this->name ?: $this->getFieldsetName());
         $fieldset->setHydrator(
-            new DoctrineObject($container->get('doctrine.entitymanager.orm_default'))
+            new DoctrineObject($this->getEntityManager())
         );
         $fieldset->setObject(new $fieldsetObject());
         $fieldset->setTranslator($this->getTranslator());

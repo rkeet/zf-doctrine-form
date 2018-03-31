@@ -17,7 +17,7 @@ abstract class AbstractDoctrineFieldset extends AbstractFieldset
      * @param string $name      Lower case short class name
      * @param array $options
      */
-    public function __construct(ObjectManager $objectManager, $name, $options = [])
+    public function __construct(ObjectManager $objectManager, string $name, array $options = [])
     {
         parent::__construct($name, $options);
 
