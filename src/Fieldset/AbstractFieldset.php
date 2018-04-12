@@ -12,9 +12,6 @@ abstract class AbstractFieldset extends Fieldset
     use InputFilterAwareTrait;
     use TranslatorAwareTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         $this->add([
