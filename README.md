@@ -622,6 +622,40 @@ Framework!!!** It contains a bug, and sadly my bug report has been open for a lo
 (The bug reported is that it will always try to validate and hydrate objects, also for the non-required child fieldsets, 
 which may be empty, and thus should fail validation, but they don't, and then you get database errors, and that 
 sucks - **deep breath**)
+
+# Configuring it all
+
+The examples above, and the [examples module](https://github.com/rkeet/zf-doctrine-form/examples) as a whole, run on 
+configuration. The configuration for Forms, Fieldsets and InputFilters (with their Factories), is as follows:
+
+```php
+return [
+    'form_elements' => [ // <== NOTICE THAT CONFIG NAME FOR FORMS AND FIELDSETS!!!
+        'factories' => [
+            AddressForm::class => AddressFormFactory::class,
+            AddressFieldset::class => AddressFieldsetFactory::class,
+
+            CityForm::class => CityFormFactory::class,
+            CityFieldset::class => CityFieldsetFactory::class,
+
+            CoordinatesForm::class => CoordinatesFormFactory::class,
+            CoordinatesFieldset::class => CoordinatesFieldsetFactory::class,
+        ],
+    ],
+    'input_filters' => [ // <== NOTICE THAT CONFIG NAME FOR JUST INPUT FILTERS!!!
+        'factories' => [
+            AddressFormInputFilter::class => AddressFormInputFilterFactory::class,
+            AddressFieldsetInputFilter::class => AddressFieldsetInputFilterFactory::class,
+
+            CityFormInputFilter::class => CityFormInputFilterFactory::class,
+            CityFieldsetInputFilter::class => CityFieldsetInputFilterFactory::class,
+
+            CoordinatesFormInputFilter::class => CoordinatesFormInputFilterFactory::class,
+            CoordinatesFieldsetInputFilter::class => CoordinatesFieldsetInputFilterFactory::class,
+        ],
+    ],
+];
+```
  
 # Ok that's it. 
 
