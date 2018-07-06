@@ -56,9 +56,50 @@ class CollectionInputFilter extends \Zend\InputFilter\CollectionInputFilter
             }
 
             $this->collectionValues[$key] = $inputFilter->getValues();
-            $this->collectionRawValues[$key] = $inputFilter->getRawValues();
+
+            // https://github.com/zendframework/zend-inputfilter/pull/169
+            //            $this->collectionRawValues[$key] = $inputFilter->getRawValues();
         }
 
         return $valid;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Sets the collectionRawValues without any modifications.
+     */
+    public function setData($data)
+    {
+        if ( ! (is_array($data) || $data instanceof Traversable)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    '%s expects an array or Traversable collection; invalid collection of type %s provided',
+                    __METHOD__,
+                    is_object($data) ? get_class($data) : gettype($data)
+                )
+            );
+        }
+
+        // https://github.com/zendframework/zend-inputfilter/pull/169
+        $this->collectionRawValues = $data;
+
+        foreach ($data as $item) {
+            if (is_array($item) || $item instanceof Traversable) {
+                continue;
+            }
+
+            throw new InvalidArgumentException(
+                sprintf(
+                    '%s expects each item in a collection to be an array or Traversable; '
+                    . 'invalid item in collection of type %s detected',
+                    __METHOD__,
+                    is_object($item) ? get_class($item) : gettype($item)
+                )
+            );
+        }
+
+        $this->data = $data;
+        return $this;
     }
 }
