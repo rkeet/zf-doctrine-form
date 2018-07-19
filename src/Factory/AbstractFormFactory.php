@@ -43,19 +43,22 @@ abstract class AbstractFormFactory implements FactoryInterface
 
     /**
      * AbstractFormFactory constructor.
+     *
      * @param $form
      * @param $formInputFilter
      */
     public function __construct($form, $formInputFilter)
     {
-        if (!class_exists($form)) {
+        if ( ! class_exists($form)) {
 
             throw new ClassNotFoundException('AbstractFormFactory requires $form to be an existing form.');
         }
 
-        if (!class_exists($formInputFilter)) {
+        if ( ! class_exists($formInputFilter)) {
 
-            throw new ClassNotFoundException('AbstractFormFactory requires $formInputFilter to be an existing form InputFilter.');
+            throw new ClassNotFoundException(
+                'AbstractFormFactory requires $formInputFilter to be an existing form InputFilter.'
+            );
         }
 
         $this->setForm($form);
@@ -64,18 +67,21 @@ abstract class AbstractFormFactory implements FactoryInterface
 
     /**
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
+     * @param string             $requestedName
+     * @param array|null         $options
+     *
      * @return AbstractForm
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : AbstractForm
     {
         $this->setTranslator($container->get('translator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
-        $inputFilter = $this->getInputFilterPluginManager()->get($this->getFormInputFilter());
+        $inputFilter =
+            $this->getInputFilterPluginManager()
+                 ->get($this->getFormInputFilter());
 
         $form = $this->getForm();
 
@@ -90,16 +96,17 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     *
      * @return AbstractFormFactory
      */
-    public function setName(string $name): AbstractFormFactory
+    public function setName(string $name) : AbstractFormFactory
     {
         $this->name = $name;
         return $this;
@@ -108,16 +115,17 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return array
      */
-    public function getOptions(): array
+    public function getOptions() : array
     {
         return $this->options;
     }
 
     /**
      * @param array $options
+     *
      * @return AbstractFormFactory
      */
-    public function setOptions(array $options): AbstractFormFactory
+    public function setOptions(array $options) : AbstractFormFactory
     {
         $this->options = $options;
         return $this;
@@ -126,16 +134,17 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return Translator
      */
-    public function getTranslator(): Translator
+    public function getTranslator() : Translator
     {
         return $this->translator;
     }
 
     /**
      * @param Translator $translator
+     *
      * @return AbstractFormFactory
      */
-    public function setTranslator(Translator $translator): AbstractFormFactory
+    public function setTranslator(Translator $translator) : AbstractFormFactory
     {
         $this->translator = $translator;
         return $this;
@@ -144,17 +153,19 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return InputFilterPluginManager
      */
-    public function getInputFilterPluginManager(): InputFilterPluginManager
+    public function getInputFilterPluginManager() : InputFilterPluginManager
     {
         return $this->inputFilterPluginManager;
     }
 
     /**
      * @param InputFilterPluginManager $inputFilterPluginManager
+     *
      * @return AbstractFormFactory
      */
-    public function setInputFilterPluginManager(InputFilterPluginManager $inputFilterPluginManager): AbstractFormFactory
-    {
+    public function setInputFilterPluginManager(
+        InputFilterPluginManager $inputFilterPluginManager
+    ) : AbstractFormFactory {
         $this->inputFilterPluginManager = $inputFilterPluginManager;
         return $this;
     }
@@ -162,16 +173,17 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getForm(): string
+    public function getForm() : string
     {
         return $this->form;
     }
 
     /**
      * @param string $form
+     *
      * @return AbstractFormFactory
      */
-    public function setForm(string $form): AbstractFormFactory
+    public function setForm(string $form) : AbstractFormFactory
     {
         $this->form = $form;
         return $this;
@@ -180,16 +192,17 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getFormInputFilter(): string
+    public function getFormInputFilter() : string
     {
         return $this->formInputFilter;
     }
 
     /**
      * @param string $formInputFilter
+     *
      * @return AbstractFormFactory
      */
-    public function setFormInputFilter(string $formInputFilter): AbstractFormFactory
+    public function setFormInputFilter(string $formInputFilter) : AbstractFormFactory
     {
         $this->formInputFilter = $formInputFilter;
         return $this;

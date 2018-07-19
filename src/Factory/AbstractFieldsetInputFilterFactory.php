@@ -9,6 +9,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class AbstractFieldsetInputFilterFactory
+ *
  * @package Keet\Form\Factory
  *
  * Creating FieldsetInputFilterFactory classes is, alas, pretty much a custom job each and every time. However,
@@ -31,6 +32,7 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
      * Use this function to setup the basic requirements commonly reused.
      *
      * @param ContainerInterface $container
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -43,17 +45,18 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
     /**
      * @return InputFilterPluginManager
      */
-    public function getInputFilterManager(): InputFilterPluginManager
+    public function getInputFilterManager() : InputFilterPluginManager
     {
         return $this->inputFilterManager;
     }
 
     /**
      * @param InputFilterPluginManager $inputFilterManager
+     *
      * @return AbstractFieldsetInputFilterFactory
      */
-    public function setInputFilterManager(InputFilterPluginManager $inputFilterManager): AbstractFieldsetInputFilterFactory
-    {
+    public function setInputFilterManager(InputFilterPluginManager $inputFilterManager
+    ) : AbstractFieldsetInputFilterFactory {
         $this->inputFilterManager = $inputFilterManager;
         return $this;
     }
@@ -61,16 +64,17 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
     /**
      * @return Translator
      */
-    public function getTranslator(): Translator
+    public function getTranslator() : Translator
     {
         return $this->translator;
     }
 
     /**
      * @param Translator $translator
+     *
      * @return AbstractFieldsetInputFilterFactory
      */
-    public function setTranslator(Translator $translator): AbstractFieldsetInputFilterFactory
+    public function setTranslator(Translator $translator) : AbstractFieldsetInputFilterFactory
     {
         $this->translator = $translator;
         return $this;

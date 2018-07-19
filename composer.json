@@ -1,20 +1,33 @@
 {
-    "name": "rkeet/zf-doctrine-form",
-    "description": "Zend Framework with Doctrine Form (Fieldset & InputFilter) usage focusing on re-usable components",
-    "keywords": ["zend", "framework", "zend framework", "mvc", "zf", "zf3", "form", "components", "fieldset", "input filter", "validator", "doctrine"],
-    "homepage": "http://keet.me/",
-    "require": {
-        "php": "^7.2",
-        "doctrine/doctrine-orm-module": "^1.1",
-        "zendframework/zend-math": "^3.0",
-        "zendframework/zend-session": "^2.8"
+  "name" : "rkeet/zf-doctrine-form",
+  "description" : "Zend Framework with Doctrine Form (Fieldset & InputFilter) usage focusing on re-usable components",
+  "keywords" : [
+    "zend",
+    "framework",
+    "zend framework",
+    "mvc",
+    "zf",
+    "zf3",
+    "form",
+    "components",
+    "fieldset",
+    "input filter",
+    "validator",
+    "doctrine"
+  ],
+  "homepage" : "http://keet.me/",
+  "require" : {
+    "php" : "^7.2",
+    "doctrine/doctrine-orm-module" : "^1.1",
+    "zendframework/zend-math" : "^3.0",
+    "zendframework/zend-session" : "^2.8"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Keet\\Form\\" : "src/"
     },
-    "autoload": {
-        "psr-4": {
-            "Keet\\Form\\": "src/"
-        },
-        "classmap": [
-            "src/Module.php"
-        ]
-    }
+    "classmap" : [
+      "src/Module.php"
+    ]
+  }
 }

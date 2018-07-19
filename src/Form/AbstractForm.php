@@ -51,12 +51,12 @@ abstract class AbstractForm extends Form implements InputFilterAwareInterface
     {
         $data = [];
         foreach ($values as $name => $value) {
-            if (! array_key_exists($name, $match)) {
+            if ( ! array_key_exists($name, $match)) {
                 continue;
             }
 
             if (is_array($value) && is_array($match[$name])) {
-                if (!empty(array_filter($value))) {
+                if ( ! empty(array_filter($value))) {
                     $data[$name] = $this->prepareBindData($value, $match[$name]);
                 }
             } else {
@@ -74,7 +74,7 @@ abstract class AbstractForm extends Form implements InputFilterAwareInterface
      */
     public function init()
     {
-        if (!$this->has('submit')) {
+        if ( ! $this->has('submit')) {
             $this->addSubmitButton();
         }
     }
@@ -84,19 +84,21 @@ abstract class AbstractForm extends Form implements InputFilterAwareInterface
      *
      * Overwrite default usage of this function by adding your own element with 'name' => 'submit' to your Form.
      *
-     * @param string $value
+     * @param string     $value
      * @param array|null $classes
      */
     public function addSubmitButton($value = 'Save', array $classes = null)
     {
-        $this->add([
-            'name'       => 'submit',
-            'type'       => Submit::class,
-            'attributes' => [
-                'value' => $value,
-                'class' => (!is_null($classes) ? join (' ', $classes) : 'btn btn-primary'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => Submit::class,
+                'attributes' => [
+                    'value' => $value,
+                    'class' => (! is_null($classes) ? join(' ', $classes) : 'btn btn-primary'),
+                ],
+            ]
+        );
     }
 
     /**
@@ -105,7 +107,8 @@ abstract class AbstractForm extends Form implements InputFilterAwareInterface
      * Extends Zend\Form with CSRF fields that can be retrieved by the name "CSRF"
      * but are resolved to their unique name
      *
-     * @param  string                  $elementOrFieldset
+     * @param  string $elementOrFieldset
+     *
      * @throws InvalidElementException
      * @return ElementInterface
      */
@@ -128,14 +131,16 @@ abstract class AbstractForm extends Form implements InputFilterAwareInterface
      */
     protected function addElementCsrf($csrfName = 'csrf')
     {
-        $this->add([
-            'type'    => Csrf::class,
-            'name'    => $csrfName,
-            'options' => [
-                'csrf_options' => [
-                    'timeout' => $this->csrfTimeout,
+        $this->add(
+            [
+                'type'    => Csrf::class,
+                'name'    => $csrfName,
+                'options' => [
+                    'csrf_options' => [
+                        'timeout' => $this->csrfTimeout,
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
     }
 }

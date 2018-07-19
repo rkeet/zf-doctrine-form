@@ -8,9 +8,10 @@ class ToFloat extends AbstractFilter
 {
     /**
      * @param mixed $value
+     *
      * @return float
      */
-    public function filter($value)
+    public function filter($value) : float
     {
         $float = $value;
 

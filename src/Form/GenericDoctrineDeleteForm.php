@@ -13,34 +13,40 @@ class GenericDoctrineDeleteForm extends AbstractDoctrineForm
      */
     public function init()
     {
-        $this->add([
-            'name' => 'id',
-            'type' => Hidden::class,
-        ]);
+        $this->add(
+            [
+                'name' => 'id',
+                'type' => Hidden::class,
+            ]
+        );
 
-        $this->add([
-            'name' => 'delete',
-            'required' => true,
-            'type' => Select::class,
-            'options' => [
-                'label' => _('Confirm deletion'),
-                'value_options' => [
-                    'yes' => _('Yes, delete it.'),
-                    'no' => _('I made a mistake, take me back.'),
+        $this->add(
+            [
+                'name'       => 'delete',
+                'required'   => true,
+                'type'       => Select::class,
+                'options'    => [
+                    'label'         => _('Confirm deletion'),
+                    'value_options' => [
+                        'yes' => _('Yes, delete it.'),
+                        'no'  => _('I made a mistake, take me back.'),
+                    ],
                 ],
-            ],
-            'attributes' => [
-                'value' => 'no',
-            ],
-        ]);
+                'attributes' => [
+                    'value' => 'no',
+                ],
+            ]
+        );
 
-        $this->add([
-            'name'       => 'submit',
-            'type'       => Submit::class,
-            'attributes' => [
-                'value' => _('Confirm action'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => Submit::class,
+                'attributes' => [
+                    'value' => _('Confirm action'),
+                ],
+            ]
+        );
 
         //Call parent initializer. Check in parent what it does.
         parent::init();

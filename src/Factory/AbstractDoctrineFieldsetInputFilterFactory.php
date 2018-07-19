@@ -10,6 +10,7 @@ use Zend\InputFilter\InputFilterPluginManager;
 
 /**
  * Class AbstractFieldsetInputFilterFactory
+ *
  * @package Keet\Form\Factory
  *
  * Creating FieldsetInputFilterFactory classes is, alas, pretty much a custom job each and every time. However,
@@ -32,7 +33,8 @@ abstract class AbstractDoctrineFieldsetInputFilterFactory extends AbstractFields
      * Use this function to setup the basic requirements commonly reused.
      *
      * @param ContainerInterface $container
-     * @param string|null $className
+     * @param string|null        $className
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -43,23 +45,27 @@ abstract class AbstractDoctrineFieldsetInputFilterFactory extends AbstractFields
         $this->setInputFilterManager($container->get(InputFilterPluginManager::class));
 
         if (isset($className) && class_exists($className)) {
-            $this->setObjectRepository($this->getObjectManager()->getRepository($className));
+            $this->setObjectRepository(
+                $this->getObjectManager()
+                     ->getRepository($className)
+            );
         }
     }
 
     /**
      * @return ObjectManager
      */
-    public function getObjectManager(): ObjectManager
+    public function getObjectManager() : ObjectManager
     {
         return $this->objectManager;
     }
 
     /**
      * @param ObjectManager $objectManager
+     *
      * @return AbstractDoctrineFieldsetInputFilterFactory
      */
-    public function setObjectManager(ObjectManager $objectManager): AbstractDoctrineFieldsetInputFilterFactory
+    public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineFieldsetInputFilterFactory
     {
         $this->objectManager = $objectManager;
         return $this;
@@ -68,16 +74,17 @@ abstract class AbstractDoctrineFieldsetInputFilterFactory extends AbstractFields
     /**
      * @return ObjectRepository
      */
-    public function getObjectRepository(): ObjectRepository
+    public function getObjectRepository() : ObjectRepository
     {
         return $this->objectRepository;
     }
 
     /**
      * @param ObjectRepository $objectRepository
+     *
      * @return AbstractDoctrineFieldsetInputFilterFactory
      */
-    public function setObjectRepository(ObjectRepository $objectRepository): AbstractDoctrineFieldsetInputFilterFactory
+    public function setObjectRepository(ObjectRepository $objectRepository) : AbstractDoctrineFieldsetInputFilterFactory
     {
         $this->objectRepository = $objectRepository;
         return $this;

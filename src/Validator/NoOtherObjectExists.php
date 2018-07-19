@@ -6,16 +6,18 @@ use DoctrineModule\Validator\NoObjectExists;
 
 /**
  * Class NoOtherObjectExists
+ *
  * @package Keet\Form\Validator
  *
  * =======================
  *
- * TIP: Best set this requirement in Factory (which loads the form). ID for comparison object (the one you're modifying) is required.
+ * TIP: Best set this requirement in Factory (which loads the form). ID for comparison object (the one you're
+ * modifying) is required.
  *
  * In Factory that sets this Validator on Input:
- *     @var \Zend\Router\Http\TreeRouteStack $router
+ * @var \Zend\Router\Http\TreeRouteStack $router
  *     $router = $this->getServiceManager()->get('router');
- *     @var \Zend\Http\Request $request
+ * @var \Zend\Http\Request               $request
  *     $request = $this->getServiceManager()->get('request');
  *
  * Then get the required ID: $router->match($request)->getParam('id')
@@ -58,34 +60,45 @@ class NoOtherObjectExists extends NoObjectExists
 {
     /**
      * @param mixed $value
+     *
      * @return bool
      * @throws \Exception
      */
     public function isValid($value)
     {
-        if (!array_key_exists('fields', $this->getOptions())) {
+        if ( ! array_key_exists('fields', $this->getOptions())) {
 
-            throw new \InvalidArgumentException('Required option "property" not set for NoOtherObjectExists Validator.');
+            throw new \InvalidArgumentException(
+                'Required option "property" not set for NoOtherObjectExists Validator.'
+            );
         }
 
-        if (!array_key_exists('class', $this->getOptions())) {
+        if ( ! array_key_exists('class', $this->getOptions())) {
 
-            throw new \InvalidArgumentException('Required option "class" not set for NoOtherObjectExists Validator.');
+            throw new \InvalidArgumentException(
+                'Required option "class" not set for NoOtherObjectExists Validator.'
+            );
         }
 
-        if (!array_key_exists('comparison_object', $this->getOptions())) {
+        if ( ! array_key_exists('comparison_object', $this->getOptions())) {
 
-            throw new \InvalidArgumentException('Required option "comparison_object" not set for NoOtherObjectExists Validator.');
+            throw new \InvalidArgumentException(
+                'Required option "comparison_object" not set for NoOtherObjectExists Validator.'
+            );
         }
 
-        if (!array_key_exists('identifier', $this->getOption('comparison_object'))) {
+        if ( ! array_key_exists('identifier', $this->getOption('comparison_object'))) {
 
-            throw new \InvalidArgumentException('Required option "identifier" not set for NoOtherObjectExists Validator "comparison_object".');
+            throw new \InvalidArgumentException(
+                'Required option "identifier" not set for NoOtherObjectExists Validator "comparison_object".'
+            );
         }
 
-        if (!array_key_exists('id', $this->getOption('comparison_object'))) {
+        if ( ! array_key_exists('id', $this->getOption('comparison_object'))) {
 
-            throw new \InvalidArgumentException('Required option "id" not set for NoOtherObjectExists Validator "comparison_object".');
+            throw new \InvalidArgumentException(
+                'Required option "id" not set for NoOtherObjectExists Validator "comparison_object".'
+            );
         }
 
         $propertyName = $this->getOption('fields');
@@ -97,11 +110,14 @@ class NoOtherObjectExists extends NoObjectExists
         $comparisonObjectProperties = $this->getOption('comparison_object');
         $getIdentifier = 'get' . ucfirst($comparisonObjectProperties['identifier']);
 
-        /** @var object $comparisonObject */
-        $comparisonObject = $this->objectRepository->findOneBy([
-            $comparisonObjectProperties['identifier'] => $comparisonObjectProperties['id']
-        ]);
-        if (!method_exists($comparisonObject, $getterMethod)) {
+        /** @var \object $comparisonObject */
+        $comparisonObject = $this->objectRepository->findOneBy(
+            [
+                $comparisonObjectProperties['identifier'] => $comparisonObjectProperties['id'],
+            ]
+        );
+
+        if ( ! method_exists($comparisonObject, $getterMethod)) {
 
             throw new \Exception(sprintf('Method %s() doesn\'t exist in class %s!', $getterMethod, $propertyClass));
         }

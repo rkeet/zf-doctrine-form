@@ -10,7 +10,7 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface
     /**
      * @return array
      */
-    public function getConfig(): array
+    public function getConfig() : array
     {
         $config = [];
 
@@ -24,7 +24,7 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface
     /**
      * @return array
      */
-    public function getAutoloaderConfig(): array
+    public function getAutoloaderConfig() : array
     {
         return [
             'Zend\Loader\StandardAutoloader' => [

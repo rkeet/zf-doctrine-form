@@ -9,9 +9,9 @@ use Keet\Form\Form\GenericDoctrineDeleteForm;
 use Zend\I18n\Translator\TranslatorServiceFactory;
 
 return [
-    'form_elements' => [
+    'form_elements'   => [
         'factories' => [
-            GenericDeleteForm::class => GenericDeleteFormFactory::class,
+            GenericDeleteForm::class         => GenericDeleteFormFactory::class,
             GenericDoctrineDeleteForm::class => GenericDoctrineDeleteFormFactory::class,
         ],
     ],
@@ -20,10 +20,11 @@ return [
             'translator' => TranslatorServiceFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'template_map' => [
-            'keet/partials/form/genericDeleteForm' => __DIR__ . '/../view/partials/generic-delete-form.phtml',
-            'keet/partials/form/genericDoctrineDeleteForm' => __DIR__ . '/../view/partials/generic-doctrine-delete-form.phtml',
+            'keet/partials/form/genericDeleteForm'         => __DIR__ . '/../view/partials/generic-delete-form.phtml',
+            'keet/partials/form/genericDoctrineDeleteForm' => __DIR__
+                . '/../view/partials/generic-doctrine-delete-form.phtml',
         ],
     ],
 ];

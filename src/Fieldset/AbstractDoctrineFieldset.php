@@ -13,9 +13,10 @@ abstract class AbstractDoctrineFieldset extends AbstractFieldset
 
     /**
      * AbstractFieldset constructor.
-     * @param ObjectManager     $objectManager
-     * @param string $name      Lower case short class name
-     * @param array $options
+     *
+     * @param ObjectManager $objectManager
+     * @param string        $name Lower case short class name
+     * @param array         $options
      */
     public function __construct(ObjectManager $objectManager, string $name, array $options = [])
     {
@@ -27,16 +28,17 @@ abstract class AbstractDoctrineFieldset extends AbstractFieldset
     /**
      * @return ObjectManager
      */
-    public function getObjectManager(): ObjectManager
+    public function getObjectManager() : ObjectManager
     {
         return $this->objectManager;
     }
 
     /**
      * @param ObjectManager $objectManager
+     *
      * @return AbstractDoctrineFieldset
      */
-    public function setObjectManager(ObjectManager $objectManager): AbstractDoctrineFieldset
+    public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineFieldset
     {
         $this->objectManager = $objectManager;
         return $this;

@@ -18,16 +18,17 @@ abstract class AbstractDoctrineForm extends AbstractForm implements ObjectManage
     /**
      * @return ObjectManager
      */
-    public function getObjectManager(): ObjectManager
+    public function getObjectManager() : ObjectManager
     {
         return $this->objectManager;
     }
 
     /**
      * @param ObjectManager $objectManager
+     *
      * @return AbstractDoctrineForm
      */
-    public function setObjectManager(ObjectManager $objectManager): AbstractDoctrineForm
+    public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineForm
     {
         $this->objectManager = $objectManager;
         return $this;

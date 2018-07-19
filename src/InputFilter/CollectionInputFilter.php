@@ -2,6 +2,9 @@
 
 namespace Keet\Form\InputFilter;
 
+use InvalidArgumentException;
+use Traversable;
+
 class CollectionInputFilter extends \Zend\InputFilter\CollectionInputFilter
 {
     /**
@@ -28,7 +31,7 @@ class CollectionInputFilter extends \Zend\InputFilter\CollectionInputFilter
             $valid = false;
         }
 
-        if (! $this->data) {
+        if ( ! $this->data) {
             $this->clearValues();
             $this->clearRawValues();
 

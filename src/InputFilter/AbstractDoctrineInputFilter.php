@@ -13,6 +13,7 @@ abstract class AbstractDoctrineInputFilter extends AbstractInputFilter
 
     /**
      * AbstractFormInputFilter constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options)
@@ -29,16 +30,17 @@ abstract class AbstractDoctrineInputFilter extends AbstractInputFilter
     /**
      * @return ObjectManager
      */
-    public function getObjectManager(): ObjectManager
+    public function getObjectManager() : ObjectManager
     {
         return $this->objectManager;
     }
 
     /**
      * @param ObjectManager $objectManager
+     *
      * @return AbstractDoctrineInputFilter
      */
-    public function setObjectManager(ObjectManager $objectManager): AbstractDoctrineInputFilter
+    public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineInputFilter
     {
         $this->objectManager = $objectManager;
         return $this;

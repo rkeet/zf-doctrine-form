@@ -23,6 +23,7 @@ abstract class AbstractFormInputFilterFactory implements FactoryInterface
      * Use this function to setup the basic requirements commonly reused.
      *
      * @param ContainerInterface $container
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -35,16 +36,17 @@ abstract class AbstractFormInputFilterFactory implements FactoryInterface
     /**
      * @return Translator
      */
-    public function getTranslator(): Translator
+    public function getTranslator() : Translator
     {
         return $this->translator;
     }
 
     /**
      * @param Translator $translator
-     * @return AbstractFieldsetInputFilterFactory
+     *
+     * @return AbstractFormInputFilterFactory
      */
-    public function setTranslator(Translator $translator): AbstractFieldsetInputFilterFactory
+    public function setTranslator(Translator $translator) : AbstractFormInputFilterFactory
     {
         $this->translator = $translator;
         return $this;
@@ -53,17 +55,18 @@ abstract class AbstractFormInputFilterFactory implements FactoryInterface
     /**
      * @return InputFilterPluginManager
      */
-    public function getInputFilterManager(): InputFilterPluginManager
+    public function getInputFilterManager() : InputFilterPluginManager
     {
         return $this->inputFilterManager;
     }
 
     /**
      * @param InputFilterPluginManager $inputFilterManager
-     * @return AbstractFieldsetInputFilterFactory
+     *
+     * @return AbstractFormInputFilterFactory
      */
-    public function setInputFilterManager(InputFilterPluginManager $inputFilterManager): AbstractFieldsetInputFilterFactory
-    {
+    public function setInputFilterManager(InputFilterPluginManager $inputFilterManager
+    ) : AbstractFormInputFilterFactory {
         $this->inputFilterManager = $inputFilterManager;
         return $this;
     }

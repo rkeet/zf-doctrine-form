@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Interop\Container\ContainerInterface;
+use Keet\Form\Form\AbstractForm;
 use Keet\Form\Form\GenericDoctrineDeleteForm;
 use Keet\Form\InputFilter\GenericDoctrineDeleteFieldsetInputFilter;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -19,19 +20,22 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
 
     /**
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
+     * @param string             $requestedName
+     * @param array|null         $options
+     *
      * @return GenericDoctrineDeleteForm
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : AbstractForm
     {
-        if (!$options['entity_name']) {
+        if ( ! $options['entity_name']) {
 
-            throw new ServiceNotCreatedException('Option "entity_name" (FQCN) required for ' . __CLASS__ . '; not set.');
+            throw new ServiceNotCreatedException(
+                'Option "entity_name" (FQCN) required for ' . __CLASS__ . '; not set.'
+            );
         }
-        if (!$options['unique_property']) {
+        if ( ! $options['unique_property']) {
 
             throw new ServiceNotCreatedException('Option "unique_property" required for ' . __CLASS__ . '; not set.');
         }
@@ -40,21 +44,23 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
         $this->setTranslator($container->get('translator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
-        /** @var EntityRepository $entityRepository */
-        $entityRepository = $this->getObjectManager()->getRepository($options['entity_name']);
+        /** @var EntityRepository $objectRepository */
+        $objectRepository = $this->getObjectManager()
+                                 ->getRepository($options['entity_name']);
 
         $form = new GenericDoctrineDeleteForm($this->name, $this->options);
         $form->setHydrator(new DoctrineObject($this->objectManager));
         $form->setObject(new $options['entity_name']());
         $form->setInputFilter(
-            $this->getInputFilterPluginManager()->get(
-                GenericDoctrineDeleteFieldsetInputFilter::class,
-                [
-                    'object_manager' => $this->getObjectManager(),
-                    'object_repository' => $entityRepository,
-                    'translator' => $this->getTranslator(),
-                ]
-            )
+            $this->getInputFilterPluginManager()
+                 ->get(
+                     GenericDoctrineDeleteFieldsetInputFilter::class,
+                     [
+                         'object_manager'    => $this->getObjectManager(),
+                         'object_repository' => $objectRepository,
+                         'translator'        => $this->getTranslator(),
+                     ]
+                 )
         );
         $form->setObjectManager($this->getObjectManager());
         $form->setTranslator($this->getTranslator());

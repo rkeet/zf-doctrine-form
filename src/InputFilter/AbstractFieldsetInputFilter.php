@@ -3,6 +3,7 @@
 namespace Keet\Form\InputFilter;
 
 use Zend\Filter\ToInt;
+use Zend\Filter\ToNull;
 use Zend\I18n\Validator\IsInt;
 
 abstract class AbstractFieldsetInputFilter extends AbstractInputFilter
@@ -12,15 +13,23 @@ abstract class AbstractFieldsetInputFilter extends AbstractInputFilter
      */
     public function init()
     {
-        $this->add([
-            'name' => 'id',
-            'required' => false,
-            'filters' => [
-                ['name' => ToInt::class],
-            ],
-            'validators' => [
-                ['name' => IsInt::class],
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'id',
+                'required'   => false,
+                'filters'    => [
+                    ['name' => ToInt::class],
+                    [
+                        'name' => ToNull::class,
+                        'options' => [
+                            'type' => ToNull::TYPE_INTEGER,
+                        ],
+                    ],
+                ],
+                'validators' => [
+                    ['name' => IsInt::class],
+                ],
+            ]
+        );
     }
 }

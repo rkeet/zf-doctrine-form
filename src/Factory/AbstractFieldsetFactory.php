@@ -38,21 +38,27 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
 
     /**
      * AbstractFieldsetFactory constructor.
+     *
      * @param $fieldset
      * @param $name
      * @param $fieldsetObject
+     *
      * @throws ClassNotFoundException
      */
     public function __construct($fieldset, $name, $fieldsetObject)
     {
-        if (!class_exists($fieldset)) {
+        if ( ! class_exists($fieldset)) {
 
-            throw new ClassNotFoundException('AbstractFieldsetFactory parameter $fieldset should be the name of an existing Fieldset.');
+            throw new ClassNotFoundException(
+                'AbstractFieldsetFactory parameter $fieldset should be the name of an existing Fieldset.'
+            );
         }
 
-        if (!class_exists($fieldsetObject)){
+        if ( ! class_exists($fieldsetObject)) {
 
-            throw new ClassNotFoundException('AbstractFieldsetFactory parameter $fieldsetObject should be the name of an existing Entity.');
+            throw new ClassNotFoundException(
+                'AbstractFieldsetFactory parameter $fieldsetObject should be the name of an existing Entity.'
+            );
         }
 
         $this->setFieldset($fieldset);
@@ -62,8 +68,9 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
 
     /**
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
+     * @param string             $requestedName
+     * @param array|null         $options
+     *
      * @return AbstractFieldset
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
@@ -87,16 +94,17 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * @return Translator
      */
-    public function getTranslator(): Translator
+    public function getTranslator() : Translator
     {
         return $this->translator;
     }
 
     /**
      * @param Translator $translator
+     *
      * @return AbstractFieldsetFactory
      */
-    public function setTranslator(Translator $translator): AbstractFieldsetFactory
+    public function setTranslator(Translator $translator) : AbstractFieldsetFactory
     {
         $this->translator = $translator;
         return $this;
@@ -105,16 +113,17 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     *
      * @return AbstractFieldsetFactory
      */
-    public function setName(string $name): AbstractFieldsetFactory
+    public function setName(string $name) : AbstractFieldsetFactory
     {
         $this->name = $name;
         return $this;
@@ -123,16 +132,17 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getFieldset(): string
+    public function getFieldset() : string
     {
         return $this->fieldset;
     }
 
     /**
      * @param string $fieldset
+     *
      * @return AbstractFieldsetFactory
      */
-    public function setFieldset(string $fieldset): AbstractFieldsetFactory
+    public function setFieldset(string $fieldset) : AbstractFieldsetFactory
     {
         $this->fieldset = $fieldset;
         return $this;
@@ -141,16 +151,17 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getFieldsetName(): string
+    public function getFieldsetName() : string
     {
         return $this->fieldsetName;
     }
 
     /**
      * @param string $fieldsetName
+     *
      * @return AbstractFieldsetFactory
      */
-    public function setFieldsetName(string $fieldsetName): AbstractFieldsetFactory
+    public function setFieldsetName(string $fieldsetName) : AbstractFieldsetFactory
     {
         $this->fieldsetName = $fieldsetName;
         return $this;
@@ -159,16 +170,17 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * @return string
      */
-    public function getFieldsetObject(): string
+    public function getFieldsetObject() : string
     {
         return $this->fieldsetObject;
     }
 
     /**
      * @param string $fieldsetObject
+     *
      * @return AbstractFieldsetFactory
      */
-    public function setFieldsetObject(string $fieldsetObject): AbstractFieldsetFactory
+    public function setFieldsetObject(string $fieldsetObject) : AbstractFieldsetFactory
     {
         $this->fieldsetObject = $fieldsetObject;
         return $this;

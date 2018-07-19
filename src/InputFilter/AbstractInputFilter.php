@@ -15,8 +15,8 @@ use Zend\InputFilter\InputFilter;
  * The isValid function of the parent is overridden in this class. The function does a pre-check to see if the the
  * current object to check is required. If not a further check is done to see if the element is empty. This check is
  * done using the arrayFilterEmpty function. This function recursively loops objects to see if they're empty. As such,
- * a structure could have nested non-required empty objects, which will be skipped from validation. If any child contains
- * a bit of data, the parent will be checked as per normal rules of Zend Framework.
+ * a structure could have nested non-required empty objects, which will be skipped from validation. If any child
+ * contains a bit of data, the parent will be checked as per normal rules of Zend Framework.
  */
 abstract class AbstractInputFilter extends InputFilter
 {
@@ -34,25 +34,31 @@ abstract class AbstractInputFilter extends InputFilter
 
     /**
      * AbstractFormInputFilter constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options)
     {
         // Check for presence of translator so as to translate return messages
-        if (!isset($options['translator'])) {
+        if ( ! isset($options['translator'])) {
 
-            throw new InvalidArgumentException('Required parameter "translator" not found. InputFilters require the Zend\I18n\Translator\Translator.');
+            throw new InvalidArgumentException(
+                'Required parameter "translator" not found. InputFilters require the Zend\I18n\Translator\Translator.'
+            );
         }
 
-        if (!$options['translator'] instanceof Translator) {
+        if ( ! $options['translator'] instanceof Translator) {
 
-            throw new InvalidArgumentException('Incorrect translator was given for the InputFilter. Required to be instance of "Zend\I18n\Translator\Translator".');
+            throw new InvalidArgumentException(
+                'Incorrect translator was given for the InputFilter. Required to be instance of "Zend\I18n\Translator\Translator".'
+            );
         }
         $this->setTranslator($options['translator']);
     }
 
     /**
      * @param array $array
+     *
      * @return bool
      */
     function arrayFilterEmpty($array)
@@ -64,7 +70,7 @@ abstract class AbstractInputFilter extends InputFilter
         }
 
         foreach ($rest as $key => $value) {
-            if (!is_array($value) && !empty($value)) {
+            if ( ! is_array($value) && ! empty($value)) {
                 return false;
             }
 
@@ -87,7 +93,7 @@ abstract class AbstractInputFilter extends InputFilter
      */
     public function isValid($context = null)
     {
-        if (!$this->isRequired() && $this->arrayFilterEmpty($this->getRawValues())) {
+        if ( ! $this->isRequired() && $this->arrayFilterEmpty($this->getRawValues())) {
 
             return true;
         }

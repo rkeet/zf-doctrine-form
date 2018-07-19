@@ -2,6 +2,7 @@
 
 namespace Keet\Form\Factory;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Interop\Container\ContainerInterface;
@@ -10,30 +11,31 @@ use Keet\Form\Fieldset\AbstractDoctrineFieldset;
 abstract class AbstractDoctrineFieldsetFactory extends AbstractFieldsetFactory
 {
     /**
-     * @var EntityManager
+     * @var ObjectManager|EntityManager
      */
-    protected $entityManager;
+    protected $objectManager;
 
     /**
      * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
+     * @param string             $requestedName
+     * @param array|null         $options
+     *
      * @return AbstractDoctrineFieldset
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setEntityManager($container->get(EntityManager::class));
+        $this->setObjectManager($container->get(EntityManager::class));
         $this->setTranslator($container->get('translator'));
 
         $fieldset = $this->getFieldset();
         $fieldsetObject = $this->getFieldsetObject();
 
         /** @var AbstractDoctrineFieldset $fieldset */
-        $fieldset = new $fieldset($this->getEntityManager(), $this->name ?: $this->getFieldsetName());
+        $fieldset = new $fieldset($this->getObjectManager(), $this->name ?: $this->getFieldsetName());
         $fieldset->setHydrator(
-            new DoctrineObject($this->getEntityManager())
+            new DoctrineObject($this->getObjectManager())
         );
         $fieldset->setObject(new $fieldsetObject());
         $fieldset->setTranslator($this->getTranslator());
@@ -44,18 +46,19 @@ abstract class AbstractDoctrineFieldsetFactory extends AbstractFieldsetFactory
     /**
      * @return EntityManager
      */
-    public function getEntityManager(): EntityManager
+    public function getObjectManager() : ObjectManager
     {
-        return $this->entityManager;
+        return $this->objectManager;
     }
 
     /**
-     * @param EntityManager $entityManager
+     * @param ObjectManager $objectManager
+     *
      * @return AbstractDoctrineFieldsetFactory
      */
-    public function setEntityManager(EntityManager $entityManager): AbstractDoctrineFieldsetFactory
+    public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineFieldsetFactory
     {
-        $this->entityManager = $entityManager;
+        $this->objectManager = $objectManager;
         return $this;
     }
 
