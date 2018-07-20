@@ -77,7 +77,7 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
 
         $fieldset = $this->getFieldset();
         $fieldsetObject = $this->getFieldsetObject();

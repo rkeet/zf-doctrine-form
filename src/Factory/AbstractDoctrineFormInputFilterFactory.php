@@ -32,7 +32,7 @@ abstract class AbstractDoctrineFormInputFilterFactory extends AbstractFieldsetIn
     public function setupRequirements(ContainerInterface $container, $className = null)
     {
         $this->setObjectManager($container->get(EntityManager::class));
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterManager($container->get(InputFilterPluginManager::class));
 
         if (isset($className) && class_exists($className)) {

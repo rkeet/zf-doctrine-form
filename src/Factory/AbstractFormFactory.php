@@ -76,7 +76,7 @@ abstract class AbstractFormFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : AbstractForm
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
         $inputFilter =

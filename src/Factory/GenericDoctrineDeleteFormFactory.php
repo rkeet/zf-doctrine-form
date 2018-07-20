@@ -41,7 +41,7 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
         }
 
         $this->setObjectManager($container->get(EntityManager::class));
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
         /** @var EntityRepository $objectRepository */

@@ -25,7 +25,7 @@ class GenericDeleteFormFactory extends AbstractFormFactory
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
         $form = new GenericDeleteForm($this->name, $this->options);

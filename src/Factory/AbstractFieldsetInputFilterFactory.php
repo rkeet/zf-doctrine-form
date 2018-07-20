@@ -38,7 +38,7 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
      */
     public function setupRequirements(ContainerInterface $container)
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterManager($container->get(InputFilterPluginManager::class));
     }
 
