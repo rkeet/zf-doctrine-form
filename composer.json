@@ -18,8 +18,12 @@
   "homepage" : "http://keet.me/",
   "require" : {
     "php" : "^7.2",
+
     "doctrine/doctrine-orm-module" : "^1.1",
+
+    "zendframework/zend-i18n-resources": "*",
     "zendframework/zend-math" : "^3.0",
+    "zendframework/zend-mvc-i18n" : "^1.1",
     "zendframework/zend-session" : "^2.8"
   },
   "autoload" : {
