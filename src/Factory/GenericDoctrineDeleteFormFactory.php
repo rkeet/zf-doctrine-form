@@ -8,14 +8,14 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Interop\Container\ContainerInterface;
 use Keet\Form\Form\AbstractForm;
 use Keet\Form\Form\GenericDoctrineDeleteForm;
-use Keet\Form\InputFilter\GenericDoctrineDeleteFieldsetInputFilter;
+use Keet\Form\InputFilter\GenericDoctrineDeleteFormInputFilter;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
 class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
 {
     public function __construct()
     {
-        parent::__construct(GenericDoctrineDeleteForm::class, GenericDoctrineDeleteFieldsetInputFilter::class);
+        parent::__construct(GenericDoctrineDeleteForm::class, GenericDoctrineDeleteFormInputFilter::class);
     }
 
     /**
@@ -54,7 +54,7 @@ class GenericDoctrineDeleteFormFactory extends AbstractDoctrineFormFactory
         $form->setInputFilter(
             $this->getInputFilterPluginManager()
                  ->get(
-                     GenericDoctrineDeleteFieldsetInputFilter::class,
+                     GenericDoctrineDeleteFormInputFilter::class,
                      [
                          'object_manager'    => $this->getObjectManager(),
                          'object_repository' => $objectRepository,

@@ -5,7 +5,7 @@ namespace Keet\Form\Factory;
 use Interop\Container\ContainerInterface;
 use Keet\Form\Form\AbstractForm;
 use Keet\Form\Form\GenericDeleteForm;
-use Keet\Form\InputFilter\GenericDeleteFieldsetInputFilter;
+use Keet\Form\InputFilter\GenericDeleteFormInputFilter;
 use Zend\Hydrator\Reflection;
 
 /**
@@ -20,7 +20,7 @@ class GenericDeleteFormFactory extends AbstractFormFactory
 {
     public function __construct()
     {
-        parent::__construct(GenericDeleteForm::class, GenericDeleteFieldsetInputFilter::class);
+        parent::__construct(GenericDeleteForm::class, GenericDeleteFormInputFilter::class);
     }
 
     /**
@@ -42,7 +42,7 @@ class GenericDeleteFormFactory extends AbstractFormFactory
         $form->setInputFilter(
             $this->getInputFilterPluginManager()
                  ->get(
-                     GenericDeleteFieldsetInputFilter::class,
+                     GenericDeleteFormInputFilter::class,
                      [
                          'translator' => $this->getTranslator(),
                      ]
