@@ -6,7 +6,7 @@ use Keet\Form\Factory\GenericDeleteFormFactory;
 use Keet\Form\Factory\GenericDoctrineDeleteFormFactory;
 use Keet\Form\Form\GenericDeleteForm;
 use Keet\Form\Form\GenericDoctrineDeleteForm;
-use Zend\I18n\Translator\TranslatorServiceFactory;
+use Zend\Mvc\I18n\TranslatorFactory;
 
 return [
     'form_elements'   => [
@@ -17,7 +17,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            'translator' => TranslatorServiceFactory::class,
+            'translator' => TranslatorFactory::class,
         ],
     ],
     'view_manager'    => [

@@ -28,7 +28,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : AbstractForm
     {
         $this->setObjectManager($container->get(EntityManager::class));
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
         $inputFilter = $this->getInputFilterPluginManager()

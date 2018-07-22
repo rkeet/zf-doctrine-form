@@ -4,7 +4,7 @@ namespace Keet\Form\InputFilter;
 
 use Zend\Validator\InArray;
 
-class GenericDoctrineDeleteFieldsetInputFilter extends AbstractDoctrineFieldsetInputFilter
+class GenericDoctrineDeleteFormInputFilter extends AbstractDoctrineFieldsetInputFilter
 {
     public function init()
     {

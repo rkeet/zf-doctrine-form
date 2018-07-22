@@ -3,7 +3,7 @@
 namespace Keet\Form\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\I18n\Translator\Translator;
+use Zend\Mvc\I18n\Translator;
 use Zend\InputFilter\InputFilterPluginManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -38,7 +38,7 @@ abstract class AbstractFieldsetInputFilterFactory implements FactoryInterface
      */
     public function setupRequirements(ContainerInterface $container)
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterManager($container->get(InputFilterPluginManager::class));
     }
 

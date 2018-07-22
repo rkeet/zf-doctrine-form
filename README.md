@@ -481,7 +481,7 @@ class CityFieldsetFactory extends AbstractDoctrineFieldsetFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $this->setEntityManager($container->get(EntityManager::class));
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
 
         /** @var FormElementManagerV3Polyfill $formManager */
         $formManager = $container->get('FormElementManager');

@@ -27,7 +27,7 @@ abstract class AbstractDoctrineFieldsetFactory extends AbstractFieldsetFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $this->setObjectManager($container->get(EntityManager::class));
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
 
         $fieldset = $this->getFieldset();
         $fieldsetObject = $this->getFieldsetObject();

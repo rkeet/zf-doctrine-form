@@ -6,7 +6,7 @@ use Interop\Container\ContainerInterface;
 use Keet\Form\Fieldset\AbstractFieldset;
 use Zend\Di\Exception\ClassNotFoundException;
 use Zend\Hydrator\Reflection;
-use Zend\I18n\Translator\Translator;
+use Zend\Mvc\I18n\Translator;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 abstract class AbstractFieldsetFactory implements FactoryInterface
@@ -77,7 +77,7 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setTranslator($container->get('translator'));
+        $this->setTranslator($container->get('MvcTranslator'));
 
         $fieldset = $this->getFieldset();
         $fieldsetObject = $this->getFieldsetObject();

@@ -4,7 +4,15 @@ namespace Keet\Form\InputFilter;
 
 use Zend\Validator\InArray;
 
-class GenericDeleteFieldsetInputFilter extends AbstractFieldsetInputFilter
+/**
+ * Class GenericDeleteFieldsetInputFilter
+ *
+ * @package Keet\Form\InputFilter
+ *
+ * @deprecated 2018-07-22 RK: I work mainly with Doctrine, keeping this updated keeps coming back as an afterthought.
+ *             Will remove in future release. Doctrine version will remain.
+ */
+class GenericDeleteFormInputFilter extends AbstractFieldsetInputFilter
 {
     public function init()
     {
