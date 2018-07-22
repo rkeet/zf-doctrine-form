@@ -3,9 +3,9 @@
 namespace Keet\Form\InputFilter;
 
 use Zend\Di\Exception\InvalidArgumentException;
-use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareTrait;
 use Zend\InputFilter\InputFilter;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * Class adds $required property, making it available on an InputFilter.
@@ -43,14 +43,14 @@ abstract class AbstractInputFilter extends InputFilter
         if ( ! isset($options['translator'])) {
 
             throw new InvalidArgumentException(
-                'Required parameter "translator" not found. InputFilters require the Zend\I18n\Translator\Translator.'
+                'Required parameter "translator" not found. InputFilters require the Zend\Mvc\I18n\Translator.'
             );
         }
 
         if ( ! $options['translator'] instanceof Translator) {
 
             throw new InvalidArgumentException(
-                'Incorrect translator was given for the InputFilter. Required to be instance of "Zend\I18n\Translator\Translator".'
+                'Incorrect translator was given for the InputFilter. Required to be instance of "Zend\Mvc\I18n\Translator".'
             );
         }
         $this->setTranslator($options['translator']);

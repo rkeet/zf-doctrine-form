@@ -4,9 +4,6 @@ namespace Keet\Form\InputFilter;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Zend\Di\Exception\InvalidArgumentException;
-use Zend\Filter\ToInt;
-use Zend\Filter\ToNull;
-use Zend\I18n\Validator\IsInt;
 
 abstract class AbstractDoctrineFieldsetInputFilter extends AbstractDoctrineInputFilter
 {
@@ -37,28 +34,6 @@ abstract class AbstractDoctrineFieldsetInputFilter extends AbstractDoctrineInput
         $this->setObjectRepository($options['object_repository']);
 
         parent::__construct($options);
-    }
-
-    public function init()
-    {
-        $this->add(
-            [
-                'name'       => 'id',
-                'required'   => true,
-                'filters'    => [
-                    ['name' => ToInt::class],
-                    [
-                        'name' => ToNull::class,
-                        'options' => [
-                            'type' => ToNull::TYPE_INTEGER,
-                        ],
-                    ],
-                ],
-                'validators' => [
-                    ['name' => IsInt::class],
-                ],
-            ]
-        );
     }
 
     /**

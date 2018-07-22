@@ -3,7 +3,7 @@
 namespace Keet\Form\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\I18n\Translator\Translator;
+use Zend\Mvc\I18n\Translator;
 use Zend\InputFilter\InputFilterPluginManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
