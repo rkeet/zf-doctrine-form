@@ -6,6 +6,14 @@ use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 
+/**
+ * Class GenericDeleteForm
+ *
+ * @package Keet\Form\Form
+ *
+ * @deprecated 2018-07-22 RK: I work mainly with Doctrine, keeping this updated keeps coming back as an afterthought.
+ *             Will remove in future release. Doctrine version will remain.
+ */
 class GenericDeleteForm extends AbstractForm
 {
     /**

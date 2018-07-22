@@ -3,10 +3,19 @@
 namespace Keet\Form\Factory;
 
 use Interop\Container\ContainerInterface;
+use Keet\Form\Form\AbstractForm;
 use Keet\Form\Form\GenericDeleteForm;
 use Keet\Form\InputFilter\GenericDeleteFieldsetInputFilter;
 use Zend\Hydrator\Reflection;
 
+/**
+ * Class GenericDeleteFormFactory
+ *
+ * @package    Keet\Form\Factory
+ *
+ * @deprecated 2018-07-22 RK: I work mainly with Doctrine, keeping this updated keeps coming back as an afterthought.
+ *             Will remove in future release. Doctrine version will remain.
+ */
 class GenericDeleteFormFactory extends AbstractFormFactory
 {
     public function __construct()
@@ -23,7 +32,7 @@ class GenericDeleteFormFactory extends AbstractFormFactory
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : AbstractForm
     {
         $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
