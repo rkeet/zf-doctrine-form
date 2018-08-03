@@ -44,10 +44,10 @@ abstract class AbstractFormFactory implements FactoryInterface
     /**
      * AbstractFormFactory constructor.
      *
-     * @param $form
-     * @param $formInputFilter
+     * @param string $form
+     * @param string $formInputFilter
      */
-    public function __construct($form, $formInputFilter)
+    public function __construct(string $form, string $formInputFilter)
     {
         if ( ! class_exists($form)) {
 

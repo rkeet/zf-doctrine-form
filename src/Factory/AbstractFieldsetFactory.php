@@ -39,13 +39,13 @@ abstract class AbstractFieldsetFactory implements FactoryInterface
     /**
      * AbstractFieldsetFactory constructor.
      *
-     * @param $fieldset
-     * @param $name
-     * @param $fieldsetObject
+     * @param string $fieldset
+     * @param string $name
+     * @param string $fieldsetObject
      *
      * @throws ClassNotFoundException
      */
-    public function __construct($fieldset, $name, $fieldsetObject)
+    public function __construct(string $fieldset, string $name, string $fieldsetObject)
     {
         if ( ! class_exists($fieldset)) {
 

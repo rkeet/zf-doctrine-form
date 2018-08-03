@@ -38,7 +38,7 @@ abstract class AbstractDoctrineFieldsetInputFilterFactory extends AbstractFields
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function setupRequirements(ContainerInterface $container, $className = null)
+    public function setupRequirements(ContainerInterface $container, string $className = null)
     {
         $this->setObjectManager($container->get(EntityManager::class));
         $this->setTranslator($container->get('MvcTranslator'));
