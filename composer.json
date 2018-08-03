@@ -18,6 +18,9 @@
   "homepage" : "http://keet.me/",
   "require" : {
     "php" : "^7.2",
+    "ext-intl":"*",
+    "ext-json":"*",
+    "ext-gettext":"*",
 
     "doctrine/doctrine-orm-module" : "^1.1",
 
