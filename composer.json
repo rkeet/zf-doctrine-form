@@ -15,7 +15,13 @@
     "validator",
     "doctrine"
   ],
-  "homepage" : "http://keet.me/",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Robin Keet",
+      "homepage": "https://github.com/rkeet"
+    }
+  ],
   "require" : {
     "php" : "^7.2",
     "ext-intl":"*",
