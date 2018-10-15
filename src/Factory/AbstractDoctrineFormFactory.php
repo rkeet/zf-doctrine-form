@@ -31,13 +31,12 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
         $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
 
-        $inputFilter = $this->getInputFilterPluginManager()
-                            ->get($this->getFormInputFilter());
+        $inputFilter = $this->getInputFilterPluginManager()->get($this->getFormInputFilter());
 
         $form = $this->getForm();
 
         /** @var AbstractDoctrineForm $form */
-        $form = new $form($this->name, $this->options);
+        $form = new $form($this->name, $this->options ?: []);
         $form->setObjectManager($this->getObjectManager());
         $form->setTranslator($this->getTranslator());
         $form->setInputFilter($inputFilter);
@@ -48,7 +47,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
     /**
      * Checks if received class is an Entity
      *
-     * @param ObjectManager $objectManager
+     * @param ObjectManager  $objectManager
      * @param string|\object $class
      *
      * @return boolean
@@ -79,6 +78,7 @@ abstract class AbstractDoctrineFormFactory extends AbstractFormFactory
     public function setObjectManager(ObjectManager $objectManager) : AbstractDoctrineFormFactory
     {
         $this->objectManager = $objectManager;
+
         return $this;
     }
 
