@@ -11,7 +11,7 @@ class CollectionInputFilter extends \Zend\InputFilter\CollectionInputFilter
      * NOTE: Overriding original. This implementation only returns a negative result and only sets
      * messages when the object being validated is considered invalid. Original implementation always sets
      * return messages, as such is not a reliable method for determining whether a Collection is valid and/or
-     * whether only child Fieldsets which have data have been checked (as empty non-required child-Fieldsets
+     * whether only child Fieldsets, which have data, have been checked (as empty non-required child-Fieldsets
      * need not cause an invalid return).
      *
      * {@inheritdoc}
