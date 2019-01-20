@@ -19,7 +19,16 @@ abstract class AbstractFormInputFilter extends AbstractInputFilter
                     'required'   => true,
                     'filters'    => [],
                     'validators' => [
-                        ['name' => Csrf::class],
+                        [
+                            'name'    => Csrf::class,
+                            'options' => [
+                                'messages' => [
+                                    Csrf::NOT_SAME => _(
+                                        'The form expired or could otherwise not be validated. Please try again.'
+                                    ),
+                                ],
+                            ],
+                        ],
                     ],
                 ]
             );
