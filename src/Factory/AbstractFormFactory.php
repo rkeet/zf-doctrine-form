@@ -2,11 +2,15 @@
 
 namespace Keet\Form\Factory;
 
+use Exception;
 use Interop\Container\ContainerInterface;
 use Keet\Form\Form\AbstractForm;
-use Zend\Di\Exception\ClassNotFoundException;
-use Zend\Mvc\I18n\Translator;
+use ReflectionClass;
+use ReflectionException;
+use Zend\Form\FormElementManager\FormElementManagerV3Polyfill;
+use Zend\Hydrator\HydratorInterface;
 use Zend\InputFilter\InputFilterPluginManager;
+use Zend\Mvc\I18n\Translator;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 abstract class AbstractFormFactory implements FactoryInterface
@@ -32,6 +36,11 @@ abstract class AbstractFormFactory implements FactoryInterface
     protected $inputFilterPluginManager;
 
     /**
+     * @var FormElementManagerV3Polyfill
+     */
+    protected $formElementManager;
+
+    /**
      * @var string
      */
     protected $form;
@@ -42,27 +51,55 @@ abstract class AbstractFormFactory implements FactoryInterface
     protected $formInputFilter;
 
     /**
+     * @var null|string
+     */
+    protected $entityName;
+
+    /**
+     * @var null|string
+     */
+    protected $hydrator;
+
+    /**
      * AbstractFormFactory constructor.
      *
-     * @param string $form
-     * @param string $formInputFilter
+     * @param string      $form
+     * @param string      $formInputFilter
+     * @param string|null $hydrator
+     * @param string|null $entityName
+     *
+     * @throws ReflectionException
+     * @throws Exception
      */
-    public function __construct(string $form, string $formInputFilter)
-    {
+    public function __construct(
+        string $form,
+        string $formInputFilter,
+        string $hydrator = null,
+        string $entityName = null
+    ) {
         if ( ! class_exists($form)) {
-
-            throw new ClassNotFoundException('AbstractFormFactory requires $form to be an existing form.');
+            throw new Exception('AbstractFormFactory requires $form to be an existing form.', 500);
         }
 
         if ( ! class_exists($formInputFilter)) {
-
-            throw new ClassNotFoundException(
-                'AbstractFormFactory requires $formInputFilter to be an existing form InputFilter.'
+            throw new Exception(
+                'AbstractFormFactory requires $formInputFilter to be an existing form InputFilter.',
+                500
             );
         }
 
         $this->setForm($form);
         $this->setFormInputFilter($formInputFilter);
+
+        if ($entityName && class_exists($entityName)) {
+            $this->setEntityName($entityName);
+        }
+
+        if ($hydrator && class_exists($hydrator)
+            && (new ReflectionClass($hydrator))->implementsInterface(HydratorInterface::class)
+        ) {
+            $this->setHydrator($hydrator);
+        }
     }
 
     /**
@@ -78,6 +115,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     {
         $this->setTranslator($container->get('MvcTranslator'));
         $this->setInputFilterPluginManager($container->get('InputFilterManager'));
+        $this->setFormElementManager($container->get('FormElementManager'));
 
         $inputFilter =
             $this->getInputFilterPluginManager()
@@ -89,6 +127,16 @@ abstract class AbstractFormFactory implements FactoryInterface
         $form = new $form($this->name, $this->options);
         $form->setTranslator($this->getTranslator());
         $form->setInputFilter($inputFilter);
+
+        if ($this->getEntityName()) {
+            $entity = $this->getEntityName();
+            $form->setObject(new $entity());
+        }
+
+        if ($this->getHydrator()) {
+            $hydrator = $this->getHydrator();
+            $form->setHydrator(new $hydrator());
+        }
 
         return $form;
     }
@@ -109,6 +157,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     public function setName(string $name) : AbstractFormFactory
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -128,6 +177,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     public function setOptions(array $options) : AbstractFormFactory
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -147,6 +197,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     public function setTranslator(Translator $translator) : AbstractFormFactory
     {
         $this->translator = $translator;
+
         return $this;
     }
 
@@ -167,6 +218,7 @@ abstract class AbstractFormFactory implements FactoryInterface
         InputFilterPluginManager $inputFilterPluginManager
     ) : AbstractFormFactory {
         $this->inputFilterPluginManager = $inputFilterPluginManager;
+
         return $this;
     }
 
@@ -186,6 +238,7 @@ abstract class AbstractFormFactory implements FactoryInterface
     public function setForm(string $form) : AbstractFormFactory
     {
         $this->form = $form;
+
         return $this;
     }
 
@@ -205,6 +258,67 @@ abstract class AbstractFormFactory implements FactoryInterface
     public function setFormInputFilter(string $formInputFilter) : AbstractFormFactory
     {
         $this->formInputFilter = $formInputFilter;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEntityName() : ?string
+    {
+        return $this->entityName;
+    }
+
+    /**
+     * @param string|null $entityName
+     *
+     * @return AbstractFormFactory
+     */
+    public function setEntityName(?string $entityName) : AbstractFormFactory
+    {
+        $this->entityName = $entityName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHydrator() : ?string
+    {
+        return $this->hydrator;
+    }
+
+    /**
+     * @param string|null $hydrator
+     *
+     * @return AbstractFormFactory
+     */
+    public function setHydrator(?string $hydrator) : AbstractFormFactory
+    {
+        $this->hydrator = $hydrator;
+
+        return $this;
+    }
+
+    /**
+     * @return FormElementManagerV3Polyfill
+     */
+    public function getFormElementManager() : FormElementManagerV3Polyfill
+    {
+        return $this->formElementManager;
+    }
+
+    /**
+     * @param FormElementManagerV3Polyfill $formElementManager
+     *
+     * @return AbstractFormFactory
+     */
+    public function setFormElementManager(FormElementManagerV3Polyfill $formElementManager) : AbstractFormFactory
+    {
+        $this->formElementManager = $formElementManager;
+
         return $this;
     }
 
