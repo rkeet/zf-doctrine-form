@@ -42,5 +42,6 @@
     "classmap" : [
       "src/Module.php"
     ]
-  }
+  },
+  "abandoned": true
 }
